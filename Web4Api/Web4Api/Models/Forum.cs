@@ -5,22 +5,21 @@ using System.Threading.Tasks;
 
 namespace Web4Api.Models
 {
-    public class Gebruiker
+    public class Forum
     {
         public int Id { get; set; }
 
-        public string UserName { get; set; }
-
-        public string FirstName { get; set; }
-
-        public string LastName { get; set; }
-
-        public string Email { get; set; }
+        public string Naam { get; set; }
 
         public List<ForumLid> ForaLidschappen { get; set; }
 
-        public Gebruiker()
+        public Forum()
         {
+        }
+
+        public void addLid(Gebruiker gebruiker)
+        {
+            ForaLidschappen.Add(new ForumLid(this, gebruiker));
         }
     }
 }

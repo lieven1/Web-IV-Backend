@@ -27,6 +27,19 @@ namespace Web4Api.Data
                 Gebruiker gebruiker2 = new Gebruiker { UserName = "alpacino", Email = "al@gmail.be", FirstName = "Al", LastName = "Pacino" };
                 _dbContext.Gebruikers.Add(gebruiker2);
                 await CreateUser(gebruiker2.Email, "P@ssword1234");
+
+                Forum forum1 = new Forum { Naam = "Fotografie" };
+                Forum forum2 = new Forum { Naam = "Paleontologie" };
+                Forum forum3 = new Forum { Naam = "Astrografie" };
+                _dbContext.Fora.Add(forum1);
+                _dbContext.Fora.Add(forum2);
+                _dbContext.Fora.Add(forum3);
+
+                _dbContext.Forumleden.Add(new ForumLid(forum1, gebruiker1));
+                _dbContext.Forumleden.Add(new ForumLid(forum2, gebruiker2));
+                _dbContext.Forumleden.Add(new ForumLid(forum3, gebruiker1));
+                _dbContext.Forumleden.Add(new ForumLid(forum3, gebruiker2));
+
                 _dbContext.SaveChanges();
             }
         }

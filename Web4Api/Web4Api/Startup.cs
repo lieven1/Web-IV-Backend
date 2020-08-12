@@ -38,6 +38,8 @@ namespace Web4Api
 
             services.AddScoped<DataInitializer>();
             services.AddScoped<IGebruikerRepository, GebruikerRepository>();
+            services.AddScoped<IForumRepository, ForumRepository>();
+            services.AddScoped<GebruikerFilter>();
 
             services.AddOpenApiDocument(c =>
             {

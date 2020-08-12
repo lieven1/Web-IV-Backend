@@ -8,10 +8,10 @@ using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Authorization;
-using Web4Api.Data.Repositories;
 using Web4Api.DTOs;
 using Web4Api.Models;
 using System.Collections.Generic;
+using Web4Api.Data;
 
 namespace RecipeApi.Controllers
 {
@@ -98,15 +98,17 @@ namespace RecipeApi.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public ActionResult<List<Gebruiker>> GetGebruikers()
+        public IEnumerable<Gebruiker> GetGebruikers()
         {
             return _gebruikerRepository.All();
         }
 
+        [ServiceFilter(typeof(GebruikerFilter))]
         [HttpGet("getgebruiker")]
-        public ActionResult<Gebruiker> GetGebruiker()
+        public Gebruiker GetGebruiker(Gebruiker gebruiker)
         {
-            return _gebruikerRepository.GetBy(User.Identity.Name);
+            return gebruiker;
+            //return _gebruikerRepository.GetBy(User.Identity.Name);
         }
 
         private String GetToken(IdentityUser user)

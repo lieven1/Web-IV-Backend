@@ -16,14 +16,14 @@ namespace Web4Api.Data.Repositories
             _gebruikers = dbContext.Gebruikers;
         }
 
-        public List<Gebruiker> All()
+        public IEnumerable<Gebruiker> All()
         {
             return _gebruikers.ToList();
         }
 
         public Gebruiker GetBy(string email)
         {
-            return _gebruikers.SingleOrDefault(c => c.Email == email);
+            return _gebruikers.SingleOrDefault(g => g.Email == email);
         }
 
         public void Add(Gebruiker gebruiker)

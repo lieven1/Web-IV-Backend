@@ -28,6 +28,13 @@ namespace Web4Api.Controllers
             return _forumRepository.All().OrderBy(f => f.Naam);
         }
 
+        [HttpGet("getForum")]
+        [AllowAnonymous]
+        public Forum GetForum(int id)
+        {
+            return _forumRepository.GetById(id);
+        }
+
         [HttpPost]
         public ActionResult Add(Forum forum)
         {

@@ -17,6 +17,10 @@ namespace Web4Api.Models
 
         public Forum Forum { get; set; }
 
+        public Gebruiker Poster { get; set; }
+
+        public Post RepliesTo { get; set; }
+
         public Post()
         {
         }

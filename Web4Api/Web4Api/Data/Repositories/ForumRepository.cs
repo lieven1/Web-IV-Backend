@@ -21,9 +21,14 @@ namespace Web4Api.Data.Repositories
             return _fora.Include(f => f.Posts).ToList();
         }
 
+        public Forum GetById(int id)
+        {
+            return _fora.Include(f => f.ForaLidschappen).Include(f => f.Posts).SingleOrDefault(f => f.Id == id);
+        }
+
         public Forum GetBy(string naam)
         {
-            return _fora.Include(f => f.ForaLidschappen).SingleOrDefault(f => f.Naam == naam);
+            return _fora.Include(f => f.ForaLidschappen).Include(f => f.Posts).SingleOrDefault(f => f.Naam == naam);
         }
 
         public void Add(Forum forum)

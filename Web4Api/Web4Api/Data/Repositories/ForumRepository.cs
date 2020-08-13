@@ -18,12 +18,17 @@ namespace Web4Api.Data.Repositories
 
         public IEnumerable<Forum> All()
         {
-            return _fora.ToList();
+            return _fora.Include(f => f.Posts).ToList();
         }
 
         public Forum GetBy(string naam)
         {
             return _fora.Include(f => f.ForaLidschappen).SingleOrDefault(f => f.Naam == naam);
+        }
+
+        public void Add(Forum forum)
+        {
+            _fora.Add(forum);
         }
 
         public void SaveChanges()

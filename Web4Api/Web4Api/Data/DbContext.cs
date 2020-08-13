@@ -24,11 +24,9 @@ namespace Web4Api.Data
             builder.Entity<Gebruiker>().Property(u => u.FirstName).IsRequired().HasMaxLength(50);
             builder.Entity<Gebruiker>().Property(u => u.LastName).IsRequired().HasMaxLength(50);
             builder.Entity<Gebruiker>().Property(u => u.Email).IsRequired().HasMaxLength(50);
-            //builder.Entity<Gebruiker>().HasMany(u => u.ForaLidschappen).WithOne();
 
             builder.Entity<Forum>().HasKey(f => f.Id);
             builder.Entity<Forum>().Property(f => f.Naam).IsRequired().HasMaxLength(50);
-            //builder.Entity<Forum>().HasMany(f => f.ForaLidschappen).WithOne();
 
             builder.Entity<ForumLid>().HasKey(fl => new { fl.ForumId, fl.GebruikerId });
             builder.Entity<ForumLid>().HasOne(fl => fl.Forum)
@@ -42,7 +40,7 @@ namespace Web4Api.Data
             builder.Entity<Post>().Property(p => p.Inhoud).IsRequired().HasMaxLength(200);
             builder.Entity<Post>().Property(p => p.likes).IsRequired().HasDefaultValue(0);
             builder.Entity<Post>().Property(p => p.dislikes).IsRequired().HasDefaultValue(0);
-            builder.Entity<Post>().HasOne(p => p.Forum).WithMany();
+            builder.Entity<Post>().HasOne(p => p.Forum).WithMany(f => f.Posts);
         }
     }
 }

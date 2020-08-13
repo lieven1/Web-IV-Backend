@@ -28,6 +28,20 @@ namespace Web4Api.Controllers
             return _forumRepository.All().OrderBy(f => f.Naam);
         }
 
+        [HttpPost]
+        public ActionResult Add(Forum forum)
+        {
+            try
+            {
+                _forumRepository.Add(forum);
+                _forumRepository.SaveChanges();
+                return new AcceptedResult();
+            } catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
         [ServiceFilter(typeof(GebruikerFilter))]
         [HttpPost("follow")]
         public ActionResult Follow(Gebruiker gebruiker, string forumNaam)

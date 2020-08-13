@@ -40,6 +40,13 @@ namespace Web4Api.Data
                 _dbContext.Forumleden.Add(new ForumLid(forum3, gebruiker1));
                 _dbContext.Forumleden.Add(new ForumLid(forum3, gebruiker2));
 
+                Post post1 = new Post { Forum = forum1, Inhoud = "Blablablablabla cat photo blablabla" };
+                Post post2 = new Post { Forum = forum2, Inhoud = "Blablabla hadrosaurus blablabla" };
+                Post post3 = new Post { Forum = forum3, Inhoud = "Blablabla black hole blablabla" };
+                _dbContext.Posts.Add(post1);
+                _dbContext.Posts.Add(post2);
+                _dbContext.Posts.Add(post3);
+
                 _dbContext.SaveChanges();
             }
         }

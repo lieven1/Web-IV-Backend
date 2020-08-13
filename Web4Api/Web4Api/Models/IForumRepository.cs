@@ -9,6 +9,7 @@ namespace Web4Api.Models
     {
         IEnumerable<Forum> All();
         Forum GetBy(string naam);
+        void Add(Forum forum);
         void SaveChanges();
     }
 }

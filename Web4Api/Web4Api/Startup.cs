@@ -41,6 +41,10 @@ namespace Web4Api
             services.AddScoped<IForumRepository, ForumRepository>();
             services.AddScoped<GebruikerFilter>();
 
+            services.AddControllers().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
+
             services.AddOpenApiDocument(c =>
             {
                 c.DocumentName = "apidocs";

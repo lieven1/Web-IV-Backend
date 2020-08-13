@@ -13,6 +13,8 @@ namespace Web4Api.Models
 
         public List<ForumLid> ForaLidschappen { get; set; }
 
+        public List<Post> Posts { get; set; }
+
         public Forum()
         {
         }

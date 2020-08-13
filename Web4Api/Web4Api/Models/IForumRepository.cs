@@ -7,7 +7,7 @@ namespace Web4Api.Models
 {
     public interface IForumRepository
     {
-        IEnumerable<Forum> All();
+        IEnumerable<Forum> Fora(string filter);
         Forum GetById(int id);
         Forum GetBy(string naam);
         void Add(Forum forum);

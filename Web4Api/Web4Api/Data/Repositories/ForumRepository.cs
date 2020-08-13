@@ -16,9 +16,15 @@ namespace Web4Api.Data.Repositories
             _fora = context.Fora;
         }
 
-        public IEnumerable<Forum> All()
+        public IEnumerable<Forum> Fora(string filter)
         {
-            return _fora.Include(f => f.Posts).ToList();
+            if (filter == "undefined")
+            {
+                return _fora.Include(f => f.Posts);
+            } else
+            {
+                return _fora.Where(f => f.Naam.ToLower().StartsWith(filter.ToLower())).Include(f => f.Posts);
+            }
         }
 
         public Forum GetById(int id)

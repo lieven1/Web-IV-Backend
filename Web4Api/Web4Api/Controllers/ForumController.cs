@@ -21,11 +21,13 @@ namespace Web4Api.Controllers
             _forumRepository = forumRepository;
         }
 
-        [HttpGet]
+        [HttpGet("getFora")]
         [AllowAnonymous]
-        public IEnumerable<Forum> GetFora()
+        public IEnumerable<Forum> GetFora(string filter)
         {
-            return _forumRepository.All().OrderBy(f => f.Naam);
+
+            IEnumerable<Forum> fora = _forumRepository.Fora(filter).OrderBy(f => f.Naam);
+            return fora;
         }
 
         [HttpGet("getForum")]

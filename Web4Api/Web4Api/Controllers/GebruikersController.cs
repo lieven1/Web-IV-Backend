@@ -111,6 +111,13 @@ namespace RecipeApi.Controllers
             //return _gebruikerRepository.GetBy(User.Identity.Name);
         }
 
+        [ServiceFilter(typeof(GebruikerFilter))]
+        [HttpGet("getUserName")]
+        public string GetGebruikersnaam(Gebruiker gebruiker)
+        {
+            return gebruiker.UserName;
+        }
+
         private String GetToken(IdentityUser user)
         {
             // Create the token

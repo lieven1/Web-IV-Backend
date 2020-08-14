@@ -39,6 +39,7 @@ namespace Web4Api
             services.AddScoped<DataInitializer>();
             services.AddScoped<IGebruikerRepository, GebruikerRepository>();
             services.AddScoped<IForumRepository, ForumRepository>();
+            services.AddScoped<IPostRepository, PostRepository>();
             services.AddScoped<GebruikerFilter>();
 
             services.AddControllers().AddNewtonsoftJson(options =>

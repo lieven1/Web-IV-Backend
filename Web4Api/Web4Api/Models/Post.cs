@@ -21,6 +21,8 @@ namespace Web4Api.Models
 
         public Post RepliesTo { get; set; }
 
+        public List<Post> Replies { get; set; }
+
         public Post()
         {
         }

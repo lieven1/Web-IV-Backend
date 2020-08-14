@@ -18,12 +18,12 @@ namespace Web4Api.Data.Repositories
 
         public IEnumerable<Forum> Fora(string filter)
         {
-            if (filter == "undefined")
+            if (filter == null || filter == "undefined" || filter == "")
             {
                 return _fora.Include(f => f.Posts);
             } else
             {
-                return _fora.Where(f => f.Naam.ToLower().StartsWith(filter.ToLower())).Include(f => f.Posts);
+                return _fora.Where(f => f.Naam.ToLower().StartsWith(filter.ToLower()));
             }
         }
 

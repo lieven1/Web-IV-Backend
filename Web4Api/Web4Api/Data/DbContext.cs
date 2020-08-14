@@ -42,7 +42,7 @@ namespace Web4Api.Data
             builder.Entity<Post>().Property(p => p.dislikes).IsRequired().HasDefaultValue(0);
             builder.Entity<Post>().HasOne(p => p.Forum).WithMany(f => f.Posts);
             builder.Entity<Post>().HasOne(p => p.Poster).WithMany().HasForeignKey("PosterId");
-            builder.Entity<Post>().HasOne(p => p.RepliesTo).WithMany();
+            builder.Entity<Post>().HasOne(p => p.RepliesTo).WithMany(p => p.Replies);
         }
     }
 }

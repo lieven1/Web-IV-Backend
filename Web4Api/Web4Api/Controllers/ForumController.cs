@@ -15,10 +15,14 @@ namespace Web4Api.Controllers
     public class ForumController : ControllerBase
     {
         private readonly IForumRepository _forumRepository;
+        private readonly IPostRepository _postRepository;
+        private readonly IGebruikerRepository _gebruikerRepository;
 
-        public ForumController(IForumRepository forumRepository)
+        public ForumController(IForumRepository forumRepository, IPostRepository postRepository, IGebruikerRepository gebruikerRepository)
         {
             _forumRepository = forumRepository;
+            _postRepository = postRepository;
+            _gebruikerRepository = gebruikerRepository;
         }
 
         [HttpGet("getFora")]
@@ -37,6 +41,22 @@ namespace Web4Api.Controllers
             return _forumRepository.GetById(id);
         }
 
+        [HttpGet("getPost")]
+        [AllowAnonymous]
+        public Post GetPost(int id)
+        {
+            return _postRepository.GetById(id);
+        }
+
+        [HttpGet("getPosts")]
+        [AllowAnonymous]
+        public IEnumerable<Post> GetPosts(int forumId)
+        {
+            Forum f = _forumRepository.GetById(forumId);
+            IEnumerable<Post> posts = _postRepository.Posts(f);
+            return posts;
+        }
+
         [HttpPost]
         public ActionResult Add(Forum forum)
         {
@@ -51,17 +71,34 @@ namespace Web4Api.Controllers
             }
         }
 
-        [ServiceFilter(typeof(GebruikerFilter))]
-        [HttpPost("follow")]
-        public ActionResult Follow(Gebruiker gebruiker, string forumNaam)
+        [HttpGet("follow")]
+        public ActionResult Follow(int forumId)
         {
             try
             {
-                Forum forum = _forumRepository.GetBy(forumNaam);
+                Gebruiker gebruiker = _gebruikerRepository.GetBy(User.Identity.Name);
+                Forum forum = _forumRepository.GetById(forumId);
                 forum.addLid(gebruiker);
                 _forumRepository.SaveChanges();
                 return new AcceptedResult();
             } catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPost("addPost")]
+        public ActionResult AddPost(Post post)
+        {
+            try
+            {
+                post.Poster = _gebruikerRepository.GetBy(User.Identity.Name);
+                Forum forum = _forumRepository.GetById(post.Forum.Id);
+                forum.Posts.Add(post);
+                _forumRepository.SaveChanges();
+                return new AcceptedResult();
+            }
+            catch (Exception)
             {
                 return BadRequest();
             }

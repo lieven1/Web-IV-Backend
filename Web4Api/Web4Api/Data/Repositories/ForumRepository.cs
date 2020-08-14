@@ -21,10 +21,10 @@ namespace Web4Api.Data.Repositories
         {
             if (filter == null || filter == "undefined" || filter == "")
             {
-                return _fora.AsNoTracking().Include(f => f.ForaLidschappen);
+                return _fora.Include(f => f.ForaLidschappen);
             } else
             {
-                return _fora.AsNoTracking().Include(f => f.ForaLidschappen).Where(f => f.Naam.ToLower().StartsWith(filter.ToLower()));
+                return _fora.Include(f => f.ForaLidschappen).Where(f => f.Naam.ToLower().StartsWith(filter.ToLower()));
             }
         }
 
@@ -35,7 +35,7 @@ namespace Web4Api.Data.Repositories
 
         public Forum GetBy(string naam)
         {
-            return _fora.AsNoTracking().Include(f => f.ForaLidschappen).Include(f => f.Posts).SingleOrDefault(f => f.Naam == naam);
+            return _fora.Include(f => f.ForaLidschappen).Include(f => f.Posts).SingleOrDefault(f => f.Naam == naam);
         }
 
         public void Add(Forum forum)

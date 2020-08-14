@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Web4Api.Data;
 using Web4Api.Models;
 
 namespace Web4Api.Controllers
@@ -18,7 +18,8 @@ namespace Web4Api.Controllers
         private readonly IPostRepository _postRepository;
         private readonly IGebruikerRepository _gebruikerRepository;
 
-        public ForumController(IForumRepository forumRepository, IPostRepository postRepository, IGebruikerRepository gebruikerRepository)
+        public ForumController(IForumRepository forumRepository, IPostRepository postRepository, 
+            IGebruikerRepository gebruikerRepository)
         {
             _forumRepository = forumRepository;
             _postRepository = postRepository;
@@ -27,10 +28,13 @@ namespace Web4Api.Controllers
 
         [HttpGet("getFora")]
         [AllowAnonymous]
-        public IEnumerable<Forum> GetFora(string filter)
+        public IEnumerable<Forum> GetFora(string filter, string followed)
         {
-
             IEnumerable<Forum> fora = _forumRepository.Fora(filter).OrderBy(f => f.Naam);
+            if (followed != null && followed != "undefined" && followed != "")
+            {
+                fora = fora.Where(f => f.heeftLid(_gebruikerRepository.GetBy(User.Identity.Name)));
+            }
             return fora;
         }
 

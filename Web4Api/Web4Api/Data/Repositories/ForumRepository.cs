@@ -20,10 +20,10 @@ namespace Web4Api.Data.Repositories
         {
             if (filter == null || filter == "undefined" || filter == "")
             {
-                return _fora.Include(f => f.Posts);
+                return _fora.Include(f => f.ForaLidschappen);
             } else
             {
-                return _fora.Where(f => f.Naam.ToLower().StartsWith(filter.ToLower()));
+                return _fora.Include(f => f.ForaLidschappen).Where(f => f.Naam.ToLower().StartsWith(filter.ToLower()));
             }
         }
 

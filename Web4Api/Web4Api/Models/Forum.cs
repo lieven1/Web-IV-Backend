@@ -19,6 +19,15 @@ namespace Web4Api.Models
         {
         }
 
+        public bool heeftLid(Gebruiker gebruiker)
+        {
+            if (gebruiker != null)
+            {
+                return ForaLidschappen.Any(fl => fl.GebruikerId == gebruiker.Id);
+            }
+            return false;
+        }
+
         public void addLid(Gebruiker gebruiker)
         {
             ForaLidschappen.Add(new ForumLid(this, gebruiker));

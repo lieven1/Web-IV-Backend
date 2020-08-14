@@ -98,8 +98,24 @@ namespace Web4Api.Controllers
             {
                 post.Poster = _gebruikerRepository.GetBy(User.Identity.Name);
                 Forum forum = _forumRepository.GetById(post.Forum.Id);
-                forum.Posts.Add(post);
+                forum.addPost(post);
                 _forumRepository.SaveChanges();
+                return new AcceptedResult();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpDelete("removePost")]
+        public ActionResult RemovePost(int postId)
+        {
+            try
+            {
+                Post post = _postRepository.GetById(postId);
+                _postRepository.Delete(post);
+                _postRepository.SaveChanges();
                 return new AcceptedResult();
             }
             catch (Exception)

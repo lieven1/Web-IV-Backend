@@ -19,6 +19,11 @@ namespace Web4Api.Models
         {
         }
 
+        //public List<Gebruiker> getLeden()
+        //{
+        //    return ForaLidschappen.Select(fl => fl.Gebruiker).ToList();
+        //}
+
         public bool heeftLid(Gebruiker gebruiker)
         {
             if (gebruiker != null)
@@ -31,6 +36,16 @@ namespace Web4Api.Models
         public void addLid(Gebruiker gebruiker)
         {
             ForaLidschappen.Add(new ForumLid(this, gebruiker));
+        }
+
+        public void addPost(Post post)
+        {
+            if (ForaLidschappen.Any(f => f.GebruikerId == post.Poster.Id)) {
+                Posts.Add(post);
+            } else
+            {
+                throw new ArgumentException("Enkel volgers kunnen posts maken");
+            }
         }
     }
 }

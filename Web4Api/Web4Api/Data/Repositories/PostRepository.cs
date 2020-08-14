@@ -29,6 +29,11 @@ namespace Web4Api.Data.Repositories
             return _posts.Include(p => p.Forum).Where(p => p.Forum.Id == forum.Id).Include(p => p.Poster).Include(p => p.RepliesTo);
         }
 
+        public void Delete(Post post)
+        {
+            _posts.Remove(post);
+        }
+
         public void SaveChanges()
         {
             _context.SaveChanges();

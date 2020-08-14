@@ -11,9 +11,9 @@ namespace Web4Api.Models
 
         public string Inhoud { get; set; }
 
-        public int likes { get; set; }
+        public int likes { get; set; } //not implemented
 
-        public int dislikes { get; set; }
+        public int dislikes { get; set; } //not implemented
 
         public Forum Forum { get; set; }
 
@@ -21,10 +21,11 @@ namespace Web4Api.Models
 
         public Post RepliesTo { get; set; }
 
-        public List<Post> Replies { get; set; }
+        public DateTime DateAdded { get; set; }
 
         public Post()
         {
+            DateAdded = DateTime.Now;
         }
     }
 }

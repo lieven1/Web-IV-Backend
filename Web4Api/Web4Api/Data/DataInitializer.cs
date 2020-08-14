@@ -2,6 +2,8 @@
 using Web4Api.Models;
 using System.Linq;
 using System.Threading.Tasks;
+using System;
+using Microsoft.EntityFrameworkCore;
 
 namespace Web4Api.Data
 {
@@ -47,12 +49,12 @@ namespace Web4Api.Data
                 _dbContext.Forumleden.Add(new ForumLid(forum4, gebruiker1));
                 _dbContext.Forumleden.Add(new ForumLid(forum4, gebruiker3));
 
-                Post post1 = new Post { Forum = forum1, Poster = gebruiker1, Inhoud = "Look at my funny cat photos!!! uwu" };
-                Post post2 = new Post { Forum = forum2, Poster = gebruiker2, Inhoud = "[Insert overly long comment about why dinosaur A would beat dinosaur B in a hypothetical fight]" };
-                Post post3 = new Post { Forum = forum3, Poster = gebruiker2, Inhoud = "Blablabla black holes blablabla Einstein blablabla look at how smart I am" };
-                Post post4 = new Post { Forum = forum4, Poster = gebruiker1, Inhoud = "I think A is better than B" };
-                Post post5 = new Post { Forum = forum4, Poster = gebruiker3, RepliesTo = post4, Inhoud = "Your opinion is invalid because clearly B is better than A." };
-                Post post6 = new Post { Forum = forum4, Poster = gebruiker1, RepliesTo = post5, Inhoud = "[Insert generic insult]" };
+                Post post1 = new Post { Forum = forum1, Poster = gebruiker1, Inhoud = "Look at my funny cat photos!!! uwu", DateAdded = new DateTime(2020, 08, 12, 5, 30, 0)};
+                Post post2 = new Post { Forum = forum2, Poster = gebruiker2, Inhoud = "[Insert overly long comment about why dinosaur A would beat dinosaur B in a hypothetical fight]", DateAdded = new DateTime(2020, 08, 14, 11, 30, 0) };
+                Post post3 = new Post { Forum = forum3, Poster = gebruiker2, Inhoud = "Blablabla black holes blablabla Einstein blablabla look at how smart I am", DateAdded = new DateTime(2020, 08, 14, 5, 30, 0) };
+                Post post4 = new Post { Forum = forum4, Poster = gebruiker1, Inhoud = "I think A is better than B", DateAdded = new DateTime(2020, 08, 10, 5, 30, 0) };
+                Post post5 = new Post { Forum = forum4, Poster = gebruiker3, RepliesTo = post4, Inhoud = "Your opinion is invalid because clearly B is better than A.", DateAdded = new DateTime(2020, 08, 11, 5, 30, 0) };
+                Post post6 = new Post { Forum = forum4, Poster = gebruiker1, RepliesTo = post5, Inhoud = "[Insert generic insult]", DateAdded = new DateTime(2020, 08, 12, 5, 30, 0) };
                 _dbContext.Posts.Add(post1);
                 _dbContext.Posts.Add(post2);
                 _dbContext.Posts.Add(post3);

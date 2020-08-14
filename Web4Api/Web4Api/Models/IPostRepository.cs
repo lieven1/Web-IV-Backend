@@ -9,6 +9,7 @@ namespace Web4Api.Models
     {
         IEnumerable<Post> Posts(Forum forum);
         Post GetById(int id);
+        void Add(Post post);
         void Delete(Post post);
         void SaveChanges();
     }

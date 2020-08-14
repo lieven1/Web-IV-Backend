@@ -40,9 +40,10 @@ namespace Web4Api.Data
             builder.Entity<Post>().Property(p => p.Inhoud).IsRequired().HasMaxLength(200);
             builder.Entity<Post>().Property(p => p.likes).IsRequired().HasDefaultValue(0);
             builder.Entity<Post>().Property(p => p.dislikes).IsRequired().HasDefaultValue(0);
+            builder.Entity<Post>().Property(p => p.DateAdded).IsRequired();
             builder.Entity<Post>().HasOne(p => p.Forum).WithMany(f => f.Posts);
             builder.Entity<Post>().HasOne(p => p.Poster).WithMany().HasForeignKey("PosterId");
-            builder.Entity<Post>().HasOne(p => p.RepliesTo).WithMany(p => p.Replies);
+            builder.Entity<Post>().HasOne(p => p.RepliesTo).WithMany();
         }
     }
 }

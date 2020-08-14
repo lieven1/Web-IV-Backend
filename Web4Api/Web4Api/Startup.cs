@@ -15,6 +15,7 @@ using System;
 using System.Text;
 using NSwag.Generation.Processors.Security;
 using Microsoft.Extensions.Hosting;
+using DbContext = Web4Api.Data.DbContext;
 
 namespace Web4Api
 {
@@ -33,8 +34,9 @@ namespace Web4Api
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
                 .AddMvcOptions(o => o.EnableEndpointRouting = false);
 
-            services.AddDbContext<Web4Api.Data.DbContext>(options =>
-              options.UseSqlServer(Configuration.GetConnectionString("Context")));
+            services.AddDbContext<DbContext>(options => 
+            { options.UseSqlServer(Configuration.GetConnectionString("Context"));
+                options.EnableSensitiveDataLogging(); });
 
             services.AddScoped<DataInitializer>();
             services.AddScoped<IGebruikerRepository, GebruikerRepository>();

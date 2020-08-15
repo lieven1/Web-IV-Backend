@@ -97,6 +97,7 @@ namespace Web4Api.Controllers
             try
             {
                 post.Poster = _gebruikerRepository.GetBy(User.Identity.Name);
+                post.RepliesTo = post.RepliesTo != null ? _postRepository.GetById(post.RepliesTo.Id) : null;
                 Forum forum = _forumRepository.GetById(post.Forum.Id);
                 forum.addPost(post);
                 _forumRepository.SaveChanges();
